@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +27,25 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', function () {
+        #return view('welcome');
+        return 'Hello! Welcome to my Laravel application!';
+    });
+
+    Route::get('/books', 'BookController@getIndex');
+
+    Route::get('/book/create', 'BookController@getCreate');
+
+    Route::post('/book/create', 'BookController@postCreate');
+
+    Route::get('/book/{id}', 'BookController@getShow');
+
+    //Practice route
+    Route::get('/practice', function() {
+
+        $random = new Random();
+
+        return $random->getRandomString(40);
+    });
+
 });
